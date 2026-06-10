@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask_cors import CORS
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -21,6 +22,13 @@ def create_app(config_name=None):
         config_name = os.getenv("FLASK_ENV", "development")
 
     app = Flask(__name__)
+
+    # Configure CORS for Vercel production and local development
+    CORS(
+        app,
+        resources={r"/api/*": {"origins": ["https://eco-pilot-ai-wheat.vercel.app", "http://localhost:5173", "http://127.0.0.1:5173"]}},
+        supports_credentials=True
+    )
 
     # Apply configuration
     app.config.from_object(config_by_name[config_name])
