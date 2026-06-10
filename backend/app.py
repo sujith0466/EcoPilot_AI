@@ -31,6 +31,11 @@ def create_app(config_name=None):
     limiter.init_app(app)
     cache.init_app(app)
 
+    # Initialize Database Schema
+    with app.app_context():
+        import models  # noqa: F401
+        db.create_all()
+
     # Setup Logging
     setup_logger(app)
 
