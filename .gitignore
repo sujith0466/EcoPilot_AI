@@ -1,0 +1,78 @@
+# Environments
+venv/
+.venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+coverage/
+.mypy_cache/
+.ruff_cache/
+
+# Logs & Instance
+logs/
+instance/
+*.log
+
+# Environment Variables
+.env
+.env.*
+frontend/.env
+backend/.env
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDEs
+.vscode/
+.idea/
+
+# Node
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# React / Vite / Builds
+dist/
+build/
+frontend/dist/
+.vite/
+*.egg-info/
+
+# Screenshots Protection
+screenshots/raw_temp/
+*puppeteer_temp*.js
+*puppeteer*.png
+
+# Legacy Frontend Protection
+legacy_templates_backup/cache/
+legacy_templates_backup/build/
+legacy_templates_backup/dist/
+legacy_templates_backup/node_modules/
+legacy_templates_backup/*.log
+
+# Generated Audit Artifacts / Temp Scripts
+*temp*.py
+*debug*.js
+recover_*.py
+*migration_helper*.py
+*screenshot_generation*.js
+verify_*.js
+*build_verification*.js
+*one_time*.py
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
