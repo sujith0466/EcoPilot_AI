@@ -8,14 +8,7 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-key-do-not-use-in-production")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # Security Headers
-    SECURITY_HEADERS = {
-        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "SAMEORIGIN",
-        "X-XSS-Protection": "1; mode=block",
-        "Content-Security-Policy": "default-src 'self'",
-    }
+    # Security Headers (Managed by Flask-Talisman)
     
     # Gemini Configuration
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")

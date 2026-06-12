@@ -5,7 +5,10 @@ import Footer from '../components/layout/Footer';
 export default function AppLayout() {
   return (
     <div className="flex flex-col min-h-screen">
-      <a href="#main-content" className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:z-50 focus-visible:p-4 focus-visible:bg-white focus-visible:text-slate-900 focus-visible:font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500">
+      <a
+        href="#main-content"
+        className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:z-50 focus-visible:p-4 focus-visible:bg-white focus-visible:text-slate-900 focus-visible:font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+      >
         Skip to main content
       </a>
       <Navbar />

@@ -1,9 +1,9 @@
 from flask import Blueprint, request
-from werkzeug.datastructures import MultiDict
 from utils.response import success_response
 from utils.errors import APIError
-from validators.calculator import CalculatorForm
-from extensions import limiter
+from marshmallow import ValidationError
+from validators.schemas import CarbonCalculationRequestSchema
+from extensions import limiter, cache
 from services.calculator_service import generate_footprint_report
 from services.tracking_service import save_carbon_record
 from utils.seed import seed_demo_user
@@ -19,17 +19,22 @@ def calculate():
     if not data:
         raise APIError("No input data provided", status_code=400)
 
-    form = CalculatorForm(formdata=MultiDict(data))
-    if not form.validate():
+    schema = CarbonCalculationRequestSchema()
+    try:
+        validated_data = schema.load(data)
+    except ValidationError as err:
         raise APIError(
-            "Validation failed", status_code=400, payload={"errors": form.errors}
+            "Validation failed", status_code=400, payload={"errors": err.messages}
         )
 
-    report = generate_footprint_report(form.data)
+    report = generate_footprint_report(validated_data)
 
     # Save the record for the demo user
     user = seed_demo_user()
     save_carbon_record(user.id, report)
+    
+    # Smart Cache Invalidation
+    cache.delete('dashboard_data_demo_user')
 
     return success_response(data=report, message="Calculation successful")
 

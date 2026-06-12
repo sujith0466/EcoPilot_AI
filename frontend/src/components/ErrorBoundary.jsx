@@ -12,7 +12,7 @@ export default class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error("ErrorBoundary caught an error", error, errorInfo);
+    console.error('ErrorBoundary caught an error', error, errorInfo);
   }
 
   render() {
@@ -24,9 +24,9 @@ export default class ErrorBoundary extends React.Component {
           </div>
           <h2 className="text-2xl font-bold text-slate-900">Something went wrong</h2>
           <p className="text-slate-500 max-w-md mx-auto mb-6">
-            We encountered an unexpected error while loading this page. 
+            We encountered an unexpected error while loading this page.
           </p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="px-6 py-3 bg-slate-900 text-white rounded-full font-semibold hover:bg-slate-800 transition-colors"
           >
@@ -36,6 +36,6 @@ export default class ErrorBoundary extends React.Component {
       );
     }
 
-    return this.props.children; 
+    return this.props.children;
   }
 }

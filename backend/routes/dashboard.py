@@ -17,7 +17,7 @@ dashboard_bp = Blueprint("dashboard", __name__)
 
 @dashboard_bp.route("/api/dashboard/data", methods=["GET"])
 @limiter.limit("30 per minute")
-@cache.cached(timeout=60, key_prefix='dashboard_data_demo_user')
+@cache.cached(timeout=300, key_prefix='dashboard_data_demo_user')
 def get_dashboard_data():
     """Retrieve full dashboard data for the demo user."""
     # Hardcoded demo user for Phase 3 (authentication excluded from scope)

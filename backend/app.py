@@ -69,13 +69,30 @@ def create_app(config_name=None):
         logger.warning(f"Rate limit exceeded: {e.description}")
         return error_response(f"Rate limit exceeded: {e.description}", 429)
 
-    # Security Headers Middleware
-    @app.after_request
-    def set_security_headers(response):
-        headers = app.config.get("SECURITY_HEADERS", {})
-        for header, value in headers.items():
-            response.headers[header] = value
-        return response
+    from flask_talisman import Talisman
+
+    csp = {
+        'default-src': [
+            '\'self\'',
+            '\'unsafe-inline\'',
+            'https://eco-pilot-ai-wheat.vercel.app'
+        ],
+        'connect-src': [
+            '\'self\'',
+            'https://eco-pilot-ai-wheat.vercel.app'
+        ]
+    }
+
+    Talisman(
+        app,
+        force_https=not app.debug and not app.testing,
+        strict_transport_security=True,
+        session_cookie_secure=not app.debug and not app.testing,
+        content_security_policy=csp,
+        referrer_policy='strict-origin-when-cross-origin',
+        x_content_type_options=True,
+        x_xss_protection=True,
+    )
 
     return app
 

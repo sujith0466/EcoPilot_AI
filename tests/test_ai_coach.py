@@ -1,6 +1,13 @@
 from services.ai_coach_service import generate_ai_coach_data
 from utils.coach_context_builder import build_coach_context
 from utils.prompt_builder import build_prompt
+import pytest
+
+@pytest.fixture(autouse=True)
+def mock_gemini_to_fail(monkeypatch):
+    def mock_gemini(*args, **kwargs):
+        raise Exception("Force fallback")
+    monkeypatch.setattr("services.ai_coach_service.get_gemini_insights", mock_gemini)
 
 def test_ai_coach_empty_history():
     data = generate_ai_coach_data([], {}, [])

@@ -1,24 +1,19 @@
-# Architecture Overview
+# EcoPilot Architecture
 
-EcoPilot is designed using a clean, scalable, and modular structure tailored for a robust carbon tracking application.
+EcoPilot uses a decoupled, full-stack architecture designed for high availability and low latency carbon calculations.
 
-## 1. Application Factory Pattern
-The application initializes through `backend/app.py`, allowing dynamic configuration loading (`development`, `testing`, `production`) and decoupled extension initialization (`db`, `migrate`, `limiter`, `cache`).
+## System Diagram
 
-## 2. Decoupled Service Layer
-Business logic is strictly separated from routing and database models:
-- **Calculator Service**: Calculates total footprints and estimates based on raw input.
-- **Analytics Service**: A zero-query mathematical engine for calculating dashboard metrics.
-- **Gamification Service**: Processes achievements and goal progression.
-- **Recommendation Service**: Analyzes histories against a predefined ruleset to offer actionable tips.
-- **AI Coach Service**: Constructs contextual prompts for dynamic conversational insights.
+```mermaid
+graph TD
+  A[React Frontend Vite] -->|REST /api| B(Flask Backend WSGI)
+  B --> C{Services Layer}
+  C -->|google-generativeai| D[Gemini 2.5 Flash]
+  C -->|SQLAlchemy| E[(SQLite / Postgres)]
+```
 
-## 3. Storage Layer
-Data is persisted using SQLAlchemy ORM (defaulting to SQLite for dev). 
-- Models are indexed appropriately (e.g. `(user_id, calculated_at DESC)` in `CarbonRecord`) to support lightning-fast chronological lookups.
-- Avoids N+1 querying paradigms by flattening historical queries.
-
-## 4. Middleware & Security
-- `Flask-Limiter` for rate limiting (429 handling).
-- Global Error Handlers to intercept all 400, 404, 429, and 500 errors and return sanitized JSON responses.
-- Enforced Security Headers (`X-XSS-Protection`, `Content-Security-Policy`).
+## Core Components
+1. **Frontend**: React 18 + Vite. Hosted on Vercel. Communicates strictly via typed Axios payloads.
+2. **Backend**: Python Flask Application Factory. Hosted on Render.
+3. **Database**: SQLite for development, configured for PostgreSQL in production.
+4. **AI Layer**: Google Gemini API, accessed securely via backend proxies to protect the API key.

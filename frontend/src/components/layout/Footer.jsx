@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Leaf, GitFork, Globe, ArrowUpRight, ExternalLink } from 'lucide-react';
+import { Leaf, GitFork, Globe, ArrowUpRight } from 'lucide-react';
 
 const FOOTER_LINKS = {
   Product: [
@@ -28,7 +28,6 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Main grid */}
         <div className="py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
-
           {/* Brand column */}
           <div className="md:col-span-4 flex flex-col gap-6">
             <Link to="/" className="flex items-center gap-2.5 w-fit group">
@@ -39,7 +38,8 @@ export default function Footer() {
             </Link>
 
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
-              An AI-powered climate intelligence platform for measuring, tracking, and reducing your carbon footprint.
+              An AI-powered climate intelligence platform for measuring, tracking, and reducing your
+              carbon footprint.
             </p>
 
             <div className="flex items-center gap-3 mt-2">
@@ -50,7 +50,7 @@ export default function Footer() {
                 aria-label="GitHub"
                 className="w-9 h-9 rounded-lg border border-slate-800 bg-slate-900 flex items-center justify-center text-slate-400 hover:text-slate-100 hover:border-slate-700 transition-all"
               >
-              <GitFork className="w-4 h-4" />
+                <GitFork className="w-4 h-4" />
               </a>
               <a
                 href="https://linkedin.com"
@@ -59,7 +59,7 @@ export default function Footer() {
                 aria-label="LinkedIn"
                 className="w-9 h-9 rounded-lg border border-slate-800 bg-slate-900 flex items-center justify-center text-slate-400 hover:text-slate-100 hover:border-slate-700 transition-all"
               >
-              <Globe className="w-4 h-4" />
+                <Globe className="w-4 h-4" />
               </a>
             </div>
           </div>
@@ -107,9 +107,13 @@ export default function Footer() {
         <div className="py-6 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500 order-2 sm:order-1">
             &copy; {new Date().getFullYear()} EcoPilot. Open-source under the{' '}
-            <a href="#" className="hover:text-slate-300 underline underline-offset-2 transition-colors">
+            <a
+              href="#"
+              className="hover:text-slate-300 underline underline-offset-2 transition-colors"
+            >
               MIT License
-            </a>.
+            </a>
+            .
           </p>
           <div className="flex items-center gap-2 order-1 sm:order-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />

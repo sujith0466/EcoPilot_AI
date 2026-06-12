@@ -76,3 +76,35 @@ verify_*.js
 
 # Windows
 Thumbs.db
+
+# Security & Secrets
+*.pem
+*.key
+*.cert
+secrets/
+
+# Testing Artifacts (Frontend)
+.nyc_output/
+coverage-final.json
+*.xml
+junit.xml
+
+# IDE Swap files
+*.swp
+
+
+# Security
+*.pem
+*.key
+*.cert
+secrets/
+
+# Additional Testing Artifacts
+.nyc_output/
+coverage-final.json
+*.xml
+junit.xml
+
+# IDEs / OS
+*.swp
+.idea/
