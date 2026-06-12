@@ -15,7 +15,7 @@
 
 **Track your carbon footprint. Get AI coaching. Live greener.**
 
-[Live Demo](#deployment) · [API Docs](#api-endpoints) · [Security Audit](docs/security_audit.md) · [PromptWars Report](docs/promptwars_evaluation_report.md)
+[Live Demo](https://eco-pilot-ai-wheat.vercel.app/) · [API Docs](#api-endpoints) · [Security Audit](docs/security_audit.md) · [PromptWars Report](docs/promptwars_evaluation_report.md)
 
 </div>
 
@@ -37,6 +37,8 @@
 12. [Security](#12-security)
 13. [PromptWars Evaluation Mapping](#13-promptwars-evaluation-mapping)
 14. [Future Scope](#14-future-scope)
+15. [Screenshots](#15-screenshots)
+16. [Assumptions](#16-assumptions)
 
 ---
 
@@ -474,6 +476,28 @@ For detailed scoring rationale and improvement recommendations, see [`docs/promp
 | 🟢 Low | **Carbon Offset Marketplace** | Integrate with a verified carbon offset API for in-app purchases |
 | 🟢 Low | **Social Sharing** | Share achievement cards and footprint scores on social media |
 | 🟢 Low | **Accessibility Audit** | Full screen reader audit and WCAG 2.1 AA compliance verification |
+
+---
+
+## 15. Screenshots
+
+**Landing Page**
+![Landing Page](screenshots/01-homepage.png)
+
+**Calculator Form**
+![Calculator](screenshots/02-calculator.png)
+
+**Dashboard & Analytics**
+![Dashboard](screenshots/04-dashboard.png)
+
+---
+
+## 16. Assumptions
+
+* EcoPilot is designed as a demonstration platform for carbon footprint awareness and sustainability education.
+* Authentication and multi-user account management were intentionally omitted to prioritize AI-powered recommendations, analytics, accessibility, and overall user experience within the challenge timeframe.
+* Carbon footprint calculations use standardized estimation factors and should be treated as educational approximations rather than certified environmental assessments.
+* AI-generated recommendations are intended for awareness and guidance purposes.
 
 ---
 
