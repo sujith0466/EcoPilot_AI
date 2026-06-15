@@ -51,4 +51,16 @@ describe('useCalculator Hook', () => {
     expect(result.current.loading).toBe(false);
     expect(result.current.result).toEqual(mockResponse.data);
   });
+  it('handles calculation failure gracefully', async () => {
+    (api.calculateFootprint as any).mockRejectedValueOnce(new Error('API Error'));
+
+    const { result } = renderHook(() => useCalculator());
+    
+    await act(async () => {
+      await result.current.handleSubmit();
+    });
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.result).toBeNull();
+  });
 });
