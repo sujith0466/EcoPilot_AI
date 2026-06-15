@@ -25,7 +25,10 @@ instance/
 .env.*
 frontend/.env
 backend/.env
+<<<<<<< HEAD
 !.env.example
+=======
+>>>>>>> 05a0dcd3e59253250a2f7f6b8c39aba55506b296
 
 # Database
 *.db
