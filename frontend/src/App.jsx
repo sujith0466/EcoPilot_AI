@@ -24,9 +24,11 @@ export default function App() {
         <Route 
           path="/calculator" 
           element={
-            <Suspense fallback={<PageLoader />}>
-              <Calculator />
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<PageLoader />}>
+                <Calculator />
+              </Suspense>
+            </ErrorBoundary>
           } 
         />
         <Route
