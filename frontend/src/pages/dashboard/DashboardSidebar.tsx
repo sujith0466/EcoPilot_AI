@@ -2,7 +2,7 @@ import { Sparkles, Trophy } from 'lucide-react';
 import type { Gamification } from '../../types';
 
 interface DashboardSidebarProps {
-  aiCoach?: string | any;
+  aiCoach?: { insights?: string[] };
   gamification?: Gamification;
 }
 
@@ -32,15 +32,18 @@ export function DashboardSidebar({ aiCoach, gamification }: DashboardSidebarProp
         </h3>
         <ul className="space-y-4">
           {(gamification?.achievements || []).length > 0 ? (
-            gamification?.achievements?.map((ach: any, i) => (
-              <li
-                key={i}
-                className="flex items-center justify-between p-3 rounded-xl bg-emerald-50/50 border border-emerald-100"
-              >
-                <span className="font-semibold text-emerald-800 text-sm">{ach?.title || ach}</span>
-                <Trophy className="w-4 h-4 text-emerald-500" aria-hidden="true" />
-              </li>
-            ))
+            gamification?.achievements?.map((ach: { title?: string } | string, i) => {
+              const title = typeof ach === 'string' ? ach : ach?.title;
+              return (
+                <li
+                  key={i}
+                  className="flex items-center justify-between p-3 rounded-xl bg-emerald-50/50 border border-emerald-100"
+                >
+                  <span className="font-semibold text-emerald-800 text-sm">{title}</span>
+                  <Trophy className="w-4 h-4 text-emerald-500" aria-hidden="true" />
+                </li>
+              );
+            })
           ) : (
             <li className="text-sm text-slate-500">No achievements yet. Keep tracking!</li>
           )}
