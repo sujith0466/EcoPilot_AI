@@ -77,18 +77,20 @@ EcoPilot was built specifically to address the core pillars of the **AI-Powered 
 
 ---
 
-## 5. Features & Sustainability Impact
+## 5. Sustainability Impact
 
-| Feature | Sustainability Impact |
-|---|---|
-| 🧮 **Multi-Step Carbon Calculator** | Reduces cognitive load by breaking down complex emissions data into an accessible, guided input flow. |
-| 🤖 **AI Carbon Coach** | Transforms abstract climate science into hyper-personalized, context-aware nudges that drive actual habit formation. |
-| 📊 **Analytics Dashboard** | Visualizes lifestyle-driven carbon trends and helps users understand the environmental impact of their daily choices over time. |
-| 🏆 **Gamification Engine** | Sustains long-term climate action by rewarding daily streaks and unlocking achievements, building a positive feedback loop. |
-| 📈 **Recommendations Engine** | Ranks actionable suggestions based on highest-impact reduction opportunities so users know exactly what to do next. |
-| 🛡️ **Security-First Architecture** | Builds trust—users will not share sensitive lifestyle data unless they know their information is encrypted and secure. |
-| 🧪 **Backend Test Suite** | Ensures calculator accuracy; users must be able to trust the math behind their environmental footprint. |
-| 📱 **Responsive UI** | Guarantees accessibility across all devices, ensuring climate awareness is available to everyone, everywhere. |
+EcoPilot directly drives measurable behavioral shifts by combining raw data with behavioral science:
+* **Carbon Awareness:** Users understand their baseline footprint and how it maps to daily choices.
+* **Behavior Change:** By breaking abstract goals down into micro-habits (e.g., "Switch one car ride a week"), users overcome climate paralysis.
+* **Environmental Education:** Users learn the implicit carbon cost of secondary actions, like dietary shifts or phantom electricity drain.
+* **Sustainable Decision Making:** Gamified progression creates a positive feedback loop that solidifies long-term change.
+
+## Key Innovations
+
+* **AI Sustainability Coach:** Unlike static calculators, Gemini provides hyper-contextualized advice based on the user's highest-emitting categories.
+* **Personalized Carbon Insights:** Generates actionable, realistic goals rather than generic platitudes.
+* **Goal Tracking:** Visualizes weekly and monthly trends to mathematically prove that small changes yield significant reductions.
+* **Gamified Sustainability Journey:** Replaces the guilt-trip narrative of traditional climate apps with an empowering, achievement-based progression system.
 
 ---
 
@@ -133,115 +135,95 @@ How does EcoPilot actually reduce emissions?
 
 ---
 
-## 8. Architecture
+## 8. System Architecture
 
+EcoPilot uses a modern, decoupled client-server architecture optimized for low-latency AI responses.
+
+### Frontend
+* **React 18 & TypeScript**: Ensures a robust, type-safe component hierarchy.
+* **TailwindCSS**: Provides utility-first styling for a responsive, modern aesthetic.
+* **Recharts**: Renders accessible, hardware-accelerated SVG data visualizations.
+
+### Backend
+* **Flask 3**: Delivers a lightweight, high-performance WSGI microservice.
+* **Marshmallow**: Enforces strict backend payload validation and serialization.
+* **Flask-Limiter**: Aggressively protects endpoints from abuse and DDoS attempts.
+* **Flask-Talisman**: Enforces strict HTTP security headers (CSP, X-Frame-Options).
+
+### Database
+* **SQLAlchemy**: Abstracts database queries safely to prevent SQL injection.
+* **SQLite / PostgreSQL**: Uses embedded SQLite for rapid local development, seamlessly migrating to PostgreSQL for production deployments.
+
+### AI Layer
+* **Gemini-Powered Sustainability Coach**: Utilizes the Google Generative AI SDK to analyze user telemetry and return hyper-personalized lifestyle interventions.
+
+### Deployment
+* **Vercel**: Hosts the compiled static React SPA globally with edge-caching.
+* **Render**: Hosts the Flask Python runtime and database engine securely.
+
+```ascii
+[User Browser]
+      │
+      ▼ (Vite Proxy / Vercel Edge)
+[React Frontend] ◄─ Zod Validation ─► [Framer Motion / Recharts]
+      │
+      ▼ (JSON API over HTTPS)
+[Flask Backend] ◄─ Talisman + Limiter ─► [Marshmallow Validation]
+      │                                       │
+      ▼                                       ▼
+[SQLAlchemy ORM]                        [Gemini AI SDK]
+      │                                       │
+      ▼                                       ▼
+[SQLite / Postgres]                  [Gemini 2.5-flash]
 ```
-┌─────────────────────────────────────────────────────┐
-│                   User Browser                       │
-│           React + Vite  (localhost:5173)              │
-└───────────────────────┬─────────────────────────────┘
-                        │  /api/* (Vite proxy)
-                        ▼
-┌─────────────────────────────────────────────────────┐
-│               Flask Backend (localhost:5000)          │
-│                                                       │
-│   ┌────────────┐  ┌──────────────┐  ┌─────────────┐ │
-│   │  main.py   │  │calculator.py │  │dashboard.py │ │
-│   │ /api/health│  │  /calculate  │  │   /data     │ │
-│   └────────────┘  └──────┬───────┘  └──────┬──────┘ │
-│                           │                 │         │
-│                    ┌──────▼─────────────────▼──────┐ │
-│                    │      Services Layer             │ │
-│                    │  gemini_service.py              │ │
-│                    └──────────────┬────────────────┘ │
-│                                   │                   │
-│                    ┌──────────────▼────────────────┐ │
-│                    │   SQLAlchemy ORM + SQLite DB    │ │
-│                    └────────────────────────────────┘ │
-└─────────────────────────────────┬───────────────────┘
-                                  │  google-generativeai SDK
-                                  ▼
-                    ┌─────────────────────────────┐
-                    │   Google Gemini 2.5-flash    │
-                    │   (AI coaching responses)    │
-                    └─────────────────────────────┘
-```
-
-### Request Flow
-
-1. User completes the multi-step calculator in the React frontend
-2. Frontend POSTs form data to `/api/calculator/calculate` via the Vite proxy
-3. Flask validates input, calculates CO₂ totals, persists to SQLite
-4. `gemini_service.py` sends the user's footprint profile to Gemini and returns coaching text
-5. Response (CO₂ total + AI advice) is returned to the frontend
-6. Dashboard fetches `/api/dashboard/data` for history, analytics, achievements, and recommendations
 
 ---
 
 ## 9. User Journey
 
-How does a user actually experience EcoPilot?
+EcoPilot transforms carbon awareness into a continuous, rewarding loop:
 
-1. **Step 1: The Pulse Check** → Sarah logs her weekly lifestyle data using the low-friction calculator (takes < 45 seconds).
-2. **Step 2: Instant Math** → EcoPilot calculates a spike in her transport emissions for the week.
-3. **Step 3: Visual Proof** → The Dashboard renders a clear chart identifying daily commutes as her major carbon contributor.
-4. **Step 4: AI Coaching** → Gemini analyzes the spike and generates a hyper-targeted suggestion: *"Try taking the bus on Tuesdays."*
-5. **Step 5: Habit Formation** → Sarah takes the bus, logs her new data, and earns a 'Commute Optimizer' badge.
-6. **Step 6: Real Impact** → Over 3 months, Sarah's historical chart proves her footprint decreased by 15%, solidifying long-term behavioral change.
-
+**User Inputs Lifestyle Data**
+↓
+*(User answers simple questions about diet, transport, and energy)*
+↓
+**Carbon Calculation Engine**
+↓
+*(Backend accurately computes exact monthly kg CO₂e)*
+↓
+**AI Sustainability Analysis**
+↓
+*(Gemini processes the numerical profile to find optimization gaps)*
+↓
+**Personalized Recommendations**
+↓
+*(User receives realistic, context-aware nudges rather than generic advice)*
+↓
+**Progress Tracking**
+↓
+*(Analytics dashboard plots historical trends and verifies emission drops)*
+↓
+**Sustainable Habit Formation**
+↓
+*(Gamification loop closes: User unlocks achievements and sustains action)*
 ---
 
-## 10. Folder Structure
+## 10. Project Structure
 
-```
-EcoPilot/
-│
-├── backend/
-│   ├── app.py                  # Application factory (create_app)
-│   ├── config.py               # Environment-based configuration classes
-│   ├── run.py                  # Entrypoint: python run.py
-│   ├── routes/
-│   │   ├── main.py             # GET / — health check
-│   │   ├── calculator.py       # POST /api/calculator/calculate
-│   │   └── dashboard.py        # GET /api/dashboard/data
-│   ├── services/
-│   │   └── gemini_service.py   # Gemini API integration
-│   ├── models/                 # SQLAlchemy models
-│   ├── validators/             # Input validation logic
-│   ├── utils/                  # Shared utilities
-│   ├── tests/                  # pytest test suite
-│   ├── requirements.txt
-│   └── .env                    # ⚠️ Never commit — excluded by .gitignore
-│
-├── frontend/
-│   ├── src/
-│   │   ├── pages/
-│   │   │   ├── Landing.jsx     # Hero / marketing page
-│   │   │   ├── Calculator.jsx  # Multi-step carbon calculator
-│   │   │   └── Dashboard.jsx   # Analytics & gamification dashboard
-│   │   ├── components/
-│   │   │   ├── layout/
-│   │   │   │   ├── Navbar.jsx
-│   │   │   │   └── Footer.jsx
-│   │   │   ├── animations/
-│   │   │   │   └── FadeIn.jsx
-│   │   │   └── ErrorBoundary.jsx
-│   │   ├── services/
-│   │   │   └── api.js          # Centralized Axios/fetch API layer
-│   │   └── App.jsx             # Router + top-level layout
-│   ├── public/
-│   ├── index.html
-│   ├── package.json
-│   ├── vite.config.js          # Vite proxy: /api/* → localhost:5000
-│   └── tailwind.config.js
-│
-├── docs/
-│   ├── promptwars_evaluation_report.md
-│   └── security_audit.md
-│
-├── .gitignore
-└── README.md
-```
+EcoPilot enforces strict separation of concerns across both environments:
+
+### `frontend/`
+* **`constants/`**: Houses static, immutable configuration (e.g., UI wizard steps, form defaults) to keep components pure.
+* **`hooks/`**: Contains custom React hooks (`useCalculator`, `useDashboardData`) that encapsulate complex API state logic.
+* **`utils/`**: Hosts pure, reusable helper functions (e.g., `formatters.ts` for consistent number precision).
+* **`pages/`**: Holds top-level route views (Landing, Calculator, Dashboard).
+* **`components/`**: Features atomic, reusable UI fragments (ErrorBoundaries, Navbars, animated containers).
+
+### `backend/`
+* **`routes/`**: Flask Blueprint definitions that strictly handle request routing and rate limiting.
+* **`services/`**: The core business logic layer. Houses the carbon math and the Gemini AI integration orchestration.
+* **`validators/`**: Features strict `Marshmallow` schemas that sanitize and enforce data safety before logic processing.
+* **`constants/`**: Stores scientifically verified emission factors securely away from logic.
 
 ---
 
@@ -259,27 +241,6 @@ EcoPilot/
 git clone https://github.com/<your-username>/EcoPilot.git
 cd EcoPilot
 ```
-
-### Security Features
-
-To ensure robust security and data protection, EcoPilot implements the following measures:
-
-### Security Headers
-* **CSP (Content Security Policy)**: Restricts executable scripts and styles to known origins, preventing XSS.
-* **X-Frame-Options**: Set to `SAMEORIGIN` to prevent clickjacking via iframes.
-* **X-Content-Type-Options**: Set to `nosniff` to prevent MIME-sniffing.
-* **Referrer Policy**: Set to `strict-origin-when-cross-origin` to protect referral data leakage.
-
-### Input Validation
-* **Frontend Validation**: Strict payload schema validation using `Zod` prior to dispatching requests. Prevents malformed, negative, or unreasonably large values.
-* **Backend Validation**: Secondary validation layer using `Marshmallow` to sanitize payloads and throw HTTP 400 errors for out-of-bounds data.
-
-### Rate Limiting
-* **API Abuse Protection**: Routes are aggressively protected using `Flask-Limiter` (e.g. `300/hour` for calculation, `200/hour` for dashboard queries) to prevent brute force or DDoS attempts.
-
-### Environment Protection
-* **Secret Management**: API keys and app secrets are injected entirely via environment variables, completely segregated from the codebase.
-* **.env Security**: `.env` variants are firmly blacklisted in `.gitignore`.
 
 ---
 
@@ -442,31 +403,24 @@ GET /api/dashboard/data
 
 ---
 
-## 14. Gemini AI Integration
+## 14. AI Sustainability Coach
 
-EcoPilot integrates **Google Gemini 2.5-flash** via the `google-generativeai` Python SDK. The integration lives entirely in `backend/services/gemini_service.py`.
+EcoPilot integrates **Google Gemini 2.5-flash** to serve as a hyper-personalized, context-aware climate coach. The integration lives securely within `backend/services/gemini_service.py`.
 
-### 🧠 How AI Creates Behavioral Change
+### What the AI Analyzes
+Gemini evaluates the user's raw categorical data (Transport, Energy, Food, Lifestyle) alongside baseline societal averages. It identifies mathematical anomalies—such as a disproportionately high transport footprint—and isolates the highest-impact area for improvement.
 
-Traditional carbon calculators fail because they deliver a guilt-inducing number and leave the user to figure out the solution alone. EcoPilot uses Gemini to act as a **judgment-free, highly analytical environmental coach**.
-* **Context-Aware**: If a user's emissions are 80% transport-based, Gemini ignores food advice and heavily targets commute optimization.
-* **Actionable Nudges**: Instead of "Eat less meat" (generic), Gemini suggests "Try substituting beef with poultry for 2 meals this week to cut your food footprint by 15%."
+### Generating Recommendations
+The AI does not output generic "reduce your carbon footprint" statements. It uses contextual reasoning to formulate micro-adjustments. 
+* **If Transport > 50%:** "Substitute two car commutes this week with public transit."
+* **If Diet involves Heavy Meat:** "Switch to plant-based meals for just 3 dinners to cut emissions by 15%."
 
-### 📊 AI Reasoning Example
+### Behavioral Change Support
+We leverage AI to remove climate paralysis. By suggesting *one specific action* rather than a dozen, the user feels capable of achieving the goal.
 
-| Problem (User Context) | AI Analysis | Recommendation | User Action | Environmental Impact |
-|---|---|---|---|---|
-| User drives 50km daily alone | Transport is 75% of total footprint; highly inefficient per-capita emission | "Switch to a carpool or hybrid remote work 2 days/week." | User carpools twice weekly | Saves ~850kg CO₂ annually |
-| User eats heavy meat diet | Beef/Lamb have extreme carbon density vs plant alternatives | "Swap beef for chicken or beans for 3 dinners this week." | User reduces red meat intake | Saves ~400kg CO₂ annually |
-| User has high electricity bill | Grid relies on fossil fuels; potential vampire drain | "Audit home appliances; switch to LED bulbs and smart plugs." | User installs LEDs | Saves ~200kg CO₂ annually |
-| User flies 4+ times a year | Aviation is the most carbon-intensive transport mode | "Replace 1 short-haul flight with a high-speed train journey." | User takes train for 1 trip | Saves ~350kg CO₂ per trip |
-| User has high waste output | Organic waste creates methane in landfills | "Start a small countertop compost bin for food scraps." | User begins composting | Reduces methane output |
-
-### Key Design Decisions
-
-- **Model**: `gemini-2.5-flash` — chosen for low latency and cost efficiency in a per-request coaching scenario.
-- **API key security**: The key is read exclusively from the `GEMINI_API_KEY` environment variable. It is never hardcoded in source code.
-- **Graceful degradation**: If the Gemini API is unavailable or returns an error, the application returns a generic coaching message rather than a 500 error, ensuring core calculator functionality is unaffected.
+### Security & Privacy
+* **Zero Logging:** API prompts are stripped of PII.
+* **Secure Key Management:** Gemini keys are pulled via isolated environment variables and never hardcoded or exposed to the client.
 
 ---
 
@@ -494,23 +448,31 @@ npm run build          # Produces dist/
 
 ---
 
-## 16. Security
+## 16. Security Architecture
 
-| Control | Status | Notes |
-|---|---|---|
-| API keys via environment variables | ✅ Implemented | `GEMINI_API_KEY`, `SECRET_KEY` read from `os.environ` |
-| `.env` excluded from git | ✅ Implemented | Listed in `.gitignore` |
-| No hardcoded credentials in source | ✅ Verified | See [Security Audit](docs/security_audit.md) |
-| Input validation on backend | ✅ Implemented | Validators in `backend/validators/` |
-| JWT authentication | ⏳ Planned | Demo mode only; architecture is JWT-ready |
-| Rate limiting | ⏳ Planned | Flask-Limiter integration planned |
-| HTTPS enforcement | ⏳ Production only | Enforced by Vercel/Render in production |
-| CORS configuration | ⏳ Production only | Restrict origins before production launch |
+EcoPilot prioritizes data integrity and defense-in-depth across the stack.
 
-> [!WARNING]
-> If your `GEMINI_API_KEY` has appeared in any terminal output or was pasted into a chat during development, rotate it immediately at [Google AI Studio](https://aistudio.google.com/) before making this repository public.
+### Security Headers
+* **CSP (Content Security Policy):** Implemented via Flask-Talisman to strictly govern resource loading and defeat XSS.
+* **X-Frame-Options:** `SAMEORIGIN` prevents clickjacking.
+* **X-Content-Type-Options:** `nosniff` mitigates MIME confusion attacks.
+* **Referrer Policy:** `strict-origin-when-cross-origin` guards referral leakage.
 
-For a full security assessment, see [`docs/security_audit.md`](docs/security_audit.md).
+### Input Validation
+* **Frontend:** Zod acts as the first line of defense, ensuring schemas are perfectly shaped before burning network requests.
+* **Backend:** Marshmallow enforces rigorous, secondary server-side validation to reject malicious or malformed payloads, preventing database corruption.
+
+### Rate Limiting
+* **Calculator API:** Capped at `300 requests/hour`.
+* **Dashboard API:** Capped at `200 requests/hour`.
+* **Goals API:** Capped at `100 requests/hour`.
+*(Powered by Flask-Limiter to neutralize brute force and DoS vectors).*
+
+### Environment Protection
+* Secrets (`SECRET_KEY`, `GEMINI_API_KEY`, `DATABASE_URL`) are loaded dynamically via `os.environ`.
+* `.env` is strongly guarded by `.gitignore` and blacklisted from all commits.
+
+For the detailed audit, consult [`docs/security_audit.md`](docs/security_audit.md).
 
 ---
 
@@ -532,18 +494,15 @@ These estimates are self-assessments based on architecture reviews, testing cove
 
 ---
 
-## 18. Future Scope
+## 18. Future Roadmap
 
-| Priority | Feature | Description |
+| Feature | Description | Target |
 |---|---|---|
-| 🔴 High | **Community Challenges** | Users can join local or global groups to compete in collective emissions reduction goals. |
-| 🔴 High | **Carbon Offset Marketplace** | Direct integration with verified APIs (e.g., Patch) to purchase offsets for unavoidable emissions right from the dashboard. |
-| 🔴 High | **JWT Authentication** | Full user accounts with login and session management to secure historical lifestyle data. |
-| 🟡 Medium | **Team Sustainability Competitions** | Enterprise mode where companies can onboard employees and gamify corporate sustainability goals. |
-| 🟡 Medium | **Predictive Sustainability Planning** | AI forecasts a user's year-end carbon score based on current trajectory and models theoretical interventions. |
-| 🟡 Medium | **Household Carbon Intelligence** | Expand the single-user model to track family-level metrics (e.g., shared utilities, joint grocery bills). |
-| 🟢 Low | **PWA Support** | Service worker + offline caching for a mobile-first experience to log habits on the go. |
-| 🟢 Low | **PostgreSQL Migration** | Scale the backend from SQLite to PostgreSQL for multi-tenant production read/write optimization. |
+| **Enterprise ESG Dashboard** | A B2B mode allowing organizations to onboard teams, track aggregate corporate emissions, and export certified ESG compliance reports. | Q4 2026 |
+| **Team Carbon Challenges** | Gamified corporate sustainability. Departments compete in carbon reduction sprints (e.g., "Bike to Work Month"). | Q4 2026 |
+| **Predictive Forecasting** | AI interpolates current tracking metrics to forecast a user's year-end emissions trajectory against national targets. | Q1 2027 |
+| **IoT Device Integration** | Connect smart meters and EV chargers directly to EcoPilot for zero-friction, automated tracking. | Q2 2027 |
+| **Community Leaderboards** | Global and local leaderboards for collective carbon reduction, fostering community-driven climate action. | Q2 2027 |
 
 ---
 
