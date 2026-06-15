@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import type { CarbonCalculationResponse } from '../../types';
+import { formatCarbon } from '../../utils/formatters';
 
 interface CalculatorResultsProps {
   result: CarbonCalculationResponse;
@@ -30,7 +31,7 @@ export function CalculatorResults({ result, handleRecalculate }: CalculatorResul
               className="absolute inset-0 w-full h-full transform -rotate-90"
               viewBox="0 0 100 100"
               role="img"
-              aria-label={`Carbon score of ${(Number(result?.total_monthly) || 0).toFixed(1)} kg CO2e per month`}
+              aria-label={`Carbon score of ${formatCarbon(result?.total_monthly)} kg CO2e per month`}
             >
               <circle
                 cx="50"
@@ -46,7 +47,7 @@ export function CalculatorResults({ result, handleRecalculate }: CalculatorResul
               />
             </svg>
             <span className="text-5xl font-extrabold text-slate-900">
-              {(Number(result?.total_monthly) || 0).toFixed(1)}
+              {formatCarbon(result?.total_monthly)}
             </span>
             <span className="text-sm font-semibold text-slate-500 mt-1">kg CO₂e / month</span>
           </div>
@@ -75,7 +76,7 @@ export function CalculatorResults({ result, handleRecalculate }: CalculatorResul
                 {key}
               </p>
               <p className="text-2xl font-extrabold text-slate-800">
-                {(Number(val) || 0).toFixed(1)}{' '}
+                {formatCarbon(val)}{' '}
                 <span className="text-base text-slate-500 font-medium">kg</span>
               </p>
             </div>

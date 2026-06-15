@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Leaf, TrendingDown, Clock } from 'lucide-react';
 import type { CarbonRecord } from '../../types';
+import { formatCarbon } from '../../utils/formatters';
 
 interface AnalyticsData {
   improvement_percentage?: number;
@@ -32,7 +33,7 @@ export function DashboardStats({ latestRecord, analytics, totalRecords = 0 }: Da
         </div>
         <div className="flex items-baseline gap-2">
           <span className="text-4xl font-extrabold text-slate-900">
-            {Number(latestRecord?.total_monthly || 0).toFixed(1)}
+            {formatCarbon(latestRecord?.total_monthly)}
           </span>
           <span className="text-slate-500 font-medium">kg CO₂</span>
         </div>
@@ -53,7 +54,7 @@ export function DashboardStats({ latestRecord, analytics, totalRecords = 0 }: Da
         <div className="flex items-baseline gap-2">
           <span className="text-4xl font-extrabold text-slate-900">
             {(analytics?.improvement_percentage || 0) > 0 ? '+' : ''}
-            {Number(analytics?.improvement_percentage || 0).toFixed(1)}%
+            {formatCarbon(analytics?.improvement_percentage)}%
           </span>
         </div>
         <p className="text-sm text-slate-500 mt-2">Compared to average</p>
