@@ -260,6 +260,31 @@ git clone https://github.com/<your-username>/EcoPilot.git
 cd EcoPilot
 ```
 
+### Security Features
+
+To ensure robust security and data protection, EcoPilot implements the following measures:
+
+### Security Headers
+* **CSP (Content Security Policy)**: Restricts executable scripts and styles to known origins, preventing XSS.
+* **X-Frame-Options**: Set to `SAMEORIGIN` to prevent clickjacking via iframes.
+* **X-Content-Type-Options**: Set to `nosniff` to prevent MIME-sniffing.
+* **Referrer Policy**: Set to `strict-origin-when-cross-origin` to protect referral data leakage.
+
+### Input Validation
+* **Frontend Validation**: Strict payload schema validation using `Zod` prior to dispatching requests. Prevents malformed, negative, or unreasonably large values.
+* **Backend Validation**: Secondary validation layer using `Marshmallow` to sanitize payloads and throw HTTP 400 errors for out-of-bounds data.
+
+### Rate Limiting
+* **API Abuse Protection**: Routes are aggressively protected using `Flask-Limiter` (e.g. `300/hour` for calculation, `200/hour` for dashboard queries) to prevent brute force or DDoS attempts.
+
+### Environment Protection
+* **Secret Management**: API keys and app secrets are injected entirely via environment variables, completely segregated from the codebase.
+* **.env Security**: `.env` variants are firmly blacklisted in `.gitignore`.
+
+---
+
+## Local Setup
+
 ### Backend Setup
 
 ```bash
