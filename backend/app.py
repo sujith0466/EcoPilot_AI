@@ -1,3 +1,8 @@
+"""
+Application Factory for EcoPilot AI.
+Initializes Flask, loads configuration, configures extensions (SQLAlchemy, Limiter, Talisman), 
+and registers application blueprints.
+"""
 import os
 from flask import Flask
 from flask_cors import CORS

@@ -177,6 +177,13 @@ EcoPilot uses a modern, decoupled client-server architecture optimized for low-l
 [SQLite / Postgres]                  [Gemini 2.5-flash]
 ```
 
+### Architecture Decisions
+* **Why React + Vite?** Provides a blazingly fast development loop with HMR and compiles to a highly optimized, static bundle for zero-configuration edge deployment on Vercel.
+* **Why Flask?** A lightweight micro-framework perfect for wrapping the Gemini Python SDK without the overhead of Django or full-stack Python architectures.
+* **Why Zod + Marshmallow?** Double-validation strategy. Zod ensures perfect payload shape and instant UI feedback, while Marshmallow guards the database from malicious injections.
+* **Why Flask-Talisman?** Security by default. It effortlessly configures Content Security Policy (CSP) headers without complex web server (Nginx) configuration.
+* **Why Gemini AI?** Superior reasoning speed compared to legacy models, allowing the app to calculate footprint *and* generate tailored coaching in under a second.
+
 ---
 
 ## 9. User Journey
