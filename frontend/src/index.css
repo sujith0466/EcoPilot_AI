@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased w-full min-h-screen m-0 p-0 overflow-x-hidden;
+  }
+  ::selection {
+    @apply bg-emerald-500 text-white;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-xl border border-white/50 shadow-premium;
+  }
+  .glass-panel-dark {
+    @apply bg-slate-900/80 backdrop-blur-xl border border-slate-700/50 shadow-premium;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-emerald-600;
+  }
+}
