@@ -89,6 +89,7 @@ def create_app(config_name=None):
         strict_transport_security=True,
         session_cookie_secure=not app.debug and not app.testing,
         content_security_policy=csp,
+        frame_options='SAMEORIGIN',
         referrer_policy='strict-origin-when-cross-origin',
         x_content_type_options=True,
         x_xss_protection=True,
