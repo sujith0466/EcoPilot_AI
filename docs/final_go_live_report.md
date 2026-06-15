@@ -33,7 +33,7 @@
    * **Build Command**: `pip install -r requirements.txt`
    * **Start Command**: `gunicorn "backend.app:create_app()"`
 3. Provide Environment Variables:
-   * `SECRET_KEY=your_secure_random_key_here`
+   * `SECRET_KEY=your_local_secret_key_here`
    * `GEMINI_API_KEY=<your-real-key-here>`
    * `FLASK_ENV=production`
 
