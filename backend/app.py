@@ -18,7 +18,7 @@ from utils.logger import setup_logger, logger
 from utils.response import error_response
 
 
-def create_app(config_name=None):
+def create_app(config_name: str | None = None) -> Flask:
     """
     Application Factory Pattern.
     Creates and configures the Flask application.

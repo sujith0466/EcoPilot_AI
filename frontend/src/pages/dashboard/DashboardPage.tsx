@@ -12,8 +12,8 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] gap-4">
-        <Loader2 className="w-10 h-10 text-emerald-500 animate-spin" />
+      <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] gap-4" aria-live="polite">
+        <Loader2 className="w-10 h-10 text-emerald-500 animate-spin" aria-hidden="true" />
         <p className="text-slate-500 font-medium animate-pulse">Loading intelligence suite...</p>
       </div>
     );

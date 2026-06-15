@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, Response
 import html
 from utils.response import success_response
 from utils.seed import seed_demo_user
@@ -18,7 +18,7 @@ dashboard_bp = Blueprint("dashboard", __name__)
 @dashboard_bp.route("/api/dashboard/data", methods=["GET"])
 @limiter.limit("200 per hour")
 @cache.cached(timeout=300, key_prefix='dashboard_data_demo_user')
-def get_dashboard_data():
+def get_dashboard_data() -> Response:
     """Retrieve full dashboard data for the demo user."""
     # Hardcoded demo user for Phase 3 (authentication excluded from scope)
     user = seed_demo_user()
@@ -49,7 +49,7 @@ def get_dashboard_data():
 
 @dashboard_bp.route("/api/goals", methods=["POST"])
 @limiter.limit("100 per hour")
-def add_goal():
+def add_goal() -> Response:
     user = seed_demo_user()
     data = request.get_json()
     title = html.escape(str(data.get("title", "New Goal")))

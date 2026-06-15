@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, Response
 from utils.response import success_response
 from utils.errors import APIError
 from marshmallow import ValidationError
@@ -13,7 +13,7 @@ calculator_bp = Blueprint("calculator", __name__)
 
 @calculator_bp.route("/api/calculator/calculate", methods=["POST"])
 @limiter.limit("300 per hour")
-def calculate():
+def calculate() -> Response:
     """Endpoint to calculate carbon footprint."""
     data = request.get_json()
     if not data:

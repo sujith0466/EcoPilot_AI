@@ -72,9 +72,10 @@ export default function CalculatorPage() {
               onClick={handleSubmit}
               disabled={loading}
               className="flex items-center gap-2 px-8 py-3 bg-emerald-500 text-white rounded-full font-bold shadow-lg shadow-emerald-500/30 hover:bg-emerald-400 outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 transition-all disabled:opacity-70"
+              aria-live="polite"
             >
-              {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Calculate'}{' '}
-              <CheckCircle2 className="w-5 h-5" />
+              {loading ? <><span className="sr-only">Calculating footprint...</span><Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /></> : 'Calculate'}{' '}
+              <CheckCircle2 className="w-5 h-5" aria-hidden="true" />
             </button>
           ) : (
             <button
