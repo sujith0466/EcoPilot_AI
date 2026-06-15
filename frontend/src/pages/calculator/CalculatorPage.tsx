@@ -1,7 +1,8 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ChevronRight, ChevronLeft, CheckCircle2, Loader2 } from 'lucide-react';
 import { useCalculator } from '../../hooks/useCalculator';
-import { CalculatorSummary, STEPS } from './CalculatorSummary';
+import { CalculatorSummary } from './CalculatorSummary';
+import { CALCULATOR_STEPS } from '../../constants/calculator';
 import { CalculatorForm } from './CalculatorForm';
 import { CalculatorResults } from './CalculatorResults';
 
@@ -66,7 +67,7 @@ export default function CalculatorPage() {
             <ChevronLeft className="w-4 h-4" /> Back
           </button>
 
-          {currentStep === STEPS.length - 1 ? (
+          {currentStep === CALCULATOR_STEPS.length - 1 ? (
             <button
               onClick={handleSubmit}
               disabled={loading}

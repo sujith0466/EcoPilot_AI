@@ -1,10 +1,5 @@
-import { CheckCircle2, Car, Home, Leaf } from 'lucide-react';
-
-export const STEPS = [
-  { id: 'transport', title: 'Transport', icon: Car },
-  { id: 'home', title: 'Home & Diet', icon: Home },
-  { id: 'lifestyle', title: 'Lifestyle', icon: Leaf },
-];
+import { CheckCircle2 } from 'lucide-react';
+import { CALCULATOR_STEPS } from '../../constants/calculator';
 
 interface CalculatorSummaryProps {
   currentStep: number;
@@ -16,10 +11,10 @@ export function CalculatorSummary({ currentStep }: CalculatorSummaryProps) {
       <div className="absolute top-1/2 left-0 right-0 h-1 bg-slate-200 -z-10 -translate-y-1/2 rounded-full" />
       <div
         className="absolute top-1/2 left-0 h-1 bg-emerald-500 -z-10 -translate-y-1/2 rounded-full transition-all duration-500"
-        style={{ width: `${(currentStep / (STEPS.length - 1)) * 100}%` }}
+        style={{ width: `${(currentStep / (CALCULATOR_STEPS.length - 1)) * 100}%` }}
       />
 
-      {STEPS.map((step, index) => {
+      {CALCULATOR_STEPS.map((step, index) => {
         const isActive = index === currentStep;
         const isPast = index < currentStep;
         return (
