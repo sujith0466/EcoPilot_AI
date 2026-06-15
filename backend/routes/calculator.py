@@ -12,7 +12,7 @@ calculator_bp = Blueprint("calculator", __name__)
 
 
 @calculator_bp.route("/api/calculator/calculate", methods=["POST"])
-@limiter.limit("100 per minute")
+@limiter.limit("300 per hour")
 def calculate():
     """Endpoint to calculate carbon footprint."""
     data = request.get_json()

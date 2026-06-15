@@ -16,7 +16,7 @@ dashboard_bp = Blueprint("dashboard", __name__)
 
 
 @dashboard_bp.route("/api/dashboard/data", methods=["GET"])
-@limiter.limit("30 per minute")
+@limiter.limit("200 per hour")
 @cache.cached(timeout=300, key_prefix='dashboard_data_demo_user')
 def get_dashboard_data():
     """Retrieve full dashboard data for the demo user."""
@@ -48,7 +48,7 @@ def get_dashboard_data():
 
 
 @dashboard_bp.route("/api/goals", methods=["POST"])
-@limiter.limit("10 per minute")
+@limiter.limit("100 per hour")
 def add_goal():
     user = seed_demo_user()
     data = request.get_json()
