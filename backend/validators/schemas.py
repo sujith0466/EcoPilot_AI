@@ -13,7 +13,7 @@ class CarbonCalculationRequestSchema(Schema):
     )
     transport_distance = fields.Float(
         required=True,
-        validate=validate.Range(min=0.0, max=500.0)
+        validate=validate.Range(min=0.0, max=100000.0)
     )
     transport_days = fields.Integer(
         required=True,
