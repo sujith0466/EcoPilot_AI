@@ -2,7 +2,7 @@ from extensions import db
 from models.user import User
 
 
-def seed_demo_user():
+def seed_demo_user() -> User:
     """Seed a demo user if one doesn't exist."""
     demo_user = User.query.filter_by(username="demo_user").first()
     if not demo_user:

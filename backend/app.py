@@ -88,12 +88,19 @@ def create_app(config_name: str | None = None) -> Flask:
         ]
     }
 
+    permissions_policy = {
+        'camera': '()',
+        'microphone': '()',
+        'geolocation': '()'
+    }
+
     Talisman(
         app,
         force_https=not app.debug and not app.testing,
         strict_transport_security=True,
         session_cookie_secure=not app.debug and not app.testing,
         content_security_policy=csp,
+        permissions_policy=permissions_policy,
         frame_options='SAMEORIGIN',
         referrer_policy='strict-origin-when-cross-origin',
         x_content_type_options=True,

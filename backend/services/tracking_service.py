@@ -3,7 +3,7 @@ from models.carbon_record import CarbonRecord
 from datetime import datetime, timezone
 
 
-def save_carbon_record(user_id: int, report: dict):
+def save_carbon_record(user_id: int, report: dict) -> CarbonRecord:
     """Saves a generated footprint report to the database for the given user."""
 
     # Extract the breakdown and save to JSON
@@ -33,7 +33,7 @@ def save_carbon_record(user_id: int, report: dict):
     return record
 
 
-def get_user_history(user_id: int, limit: int = 12):
+def get_user_history(user_id: int, limit: int = 12) -> list[dict]:
     """Retrieves the most recent carbon records for a user."""
     records = (
         CarbonRecord.query.filter_by(user_id=user_id)
